@@ -1,0 +1,17 @@
+{
+  "name": "drop39",
+  "version": "0.0.0-9",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "server.js"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.0.0beta7"
+  },
+  "subdomain": "drop39",
+  "engines": {
+    "node": "v0.6.x"
+  }
+}
