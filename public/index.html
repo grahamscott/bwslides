@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=1024, user-scalable=no">
 
-    <title>Dropping 3.9</title>
+    <title>Backbone Migration</title>
     
     <!-- Required stylesheet -->
     <link rel="stylesheet" href="core/deck.core.css">
@@ -33,62 +33,98 @@
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section class="slide">
-    <h1>Dropping 3.9</h1>
+    <h1>Backbone Migration</h1>
 </section>
 
 <section class="slide">
-    <h2>What is 3.9?</h2>
+    <h2>History</h2>
     <ol>
-        <li>Legacy app that predates the current web app</li>
-        <li>When we released the current app we left it running so people could still access it</li>
-        <li>It's unmaintained and unsupported</li>
+        <li>Initial implementation of the current Brandwatch app is called 'Workbench'</li>
+        <li>Built on an in-house framework circa 2009, as at the time there were no mature alternatives</li>
+        <li>Despite being a great technical achievement for the time, it had significant performance and maintainability problems</li>
     </ol>
 </section>
 
 <section class="slide">
-    <img src="img/thebeast.png"/>
-</section>
-
-<section class="slide">
-    <h2>What's changing?</h2>
+    <h2>Backbone - Timeline</h2>
     <ol>
-        <li>Until recently we linked to it from the top-right navigation</li>
-        <li>We're now removing direct access via the /onebrand url</li>
-        <li>We'll no longer bounce users on old browsers to 3.9</li>
+        <li>Started as a Funky Friday project in February 2011</li>
+        <li>The project quickly proved viable, and dev time for the UI and UX teams started to be assigned to the migration in Q2 2011</li>
+        <li>In lieu of a better name, the project became known simply as 'Backbone'</li>
     </ol>
-    <p>Users have been informed of these changes</p>
 </section>
 
 <section class="slide">
-    <h2>Legacy browsers</h2>
-    <p>We let them know that they need to upgrade to use the app</p>
-    <img src="img/goaway.png"/>
+    <h2>Backbone - Migration Plan</h2>
+    <ol>
+        <li>Replace Components one at a time</li>
+        <li>Once that was done, replace the core of the app</li>
+        <li>This second step is what we're doing this weekend</li>
+        <li>This strategy allowed us to reap the performance benefits incrementally over the year and a bit</li>
+    </ol>
 </section>
 
 <section class="slide">
-    <h2>Who is currently using it?</h2>
-    <p>We've seen a gradual decrease in users over the last year</p>
+    <h2>Benchmarks</h2>
+    <p>This final step should yield another speed bump</p>
+    <p>The test, using javascript benchmarking software:</p>
+    <ol>
+        <li>Load the login page</li>
+        <li>Log in</li>
+        <li>Search for a project in the projects list</li>
+        <li>Open a default dashboard</li>
+        <li>Wait for the summary component to fully load</li>
+    </ol>
+    <p>Tests were performed on Integration last week, using both applications against the same project/query</p>
+</section>
+
+<section class="slide">
+    <h2>Benchmarks - Results 1</h2>
+    <p>Application speed has greatly increased, especially in IE8</p>
     <table>
         <tr>
-            <th>Date</th>
-            <th>Visits</th>
+            <th>Workbench (IE8)</th>
+            <th>Backbone (IE8)</th>
         </tr>
         <tr>
-            <td>July 2011</td>
-            <td>664</td>
-        </tr>
-        <tr>
-            <td>June 2012</td>
-            <td>382</td>
-        </tr>
-        <tr>
-            <td>July 2012</td>
-            <td>188 (estimated)</td>
+            <td>20.4s</td>
+            <td>12.0s</td>
         </tr>
     </table>
-    <img src="img/year.png"/>
-    <p>For comparison, the main app has had <strong>13239</strong> unique visits this month.</p>
-    <p>This month we've had <strong>26</strong> unique visits to 3.9 using IE7, and <strong>2</strong> using IE6</p>
+    <img src="img/backbone/cpu.png"/>
+    <p>* Figures show the time the browser spends executing javascript. It DOES NOT include time to fetch data</p>
+    <p>** Profiling slows the app down. 'Real world' performance is better for both apps</p> 
+</section>
+
+<section class="slide">
+    <h2>Benchmarks - Results 2</h2>
+    <p>Memory usage has significantly decreased</p>
+    <table>
+        <tr>
+            <th>Workbench (Chrome 21)</th>
+            <th>Backbone (Chrome 21)</th>
+        </tr>
+        <tr>
+            <td>44.41Mb</td>
+            <td>21.59Mb</td>
+        </tr>
+    </table>
+    <img src="img/backbone/mem.png"/>
+    <p>Lower memory usage makes the app usable on low-end machines, eg tablets</p> 
+</section>
+
+<section class="slide">
+    <h2>Other changes</h2>
+    <ol>
+        <li>Redesigned Single Mention View</li>
+        <li>User/Client admin has been replaced and is <strong>MUCH</strong> faster</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Single Mention View</h2>
+    <img src="img/backbone/smv.png"/>
+    <p>Have a look on stage and direct any questions to Julius</p>
 </section>
 
 <section class="slide">
